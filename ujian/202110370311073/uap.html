@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Barang</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 30%;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        input {
+            padding: 3px;
+            border: 1px solid black;
+        }
+
+        button {
+            padding: 8px;
+            border: 1px solid black;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Kode</th>
+                <th>Barang</th>
+                <th>Harga</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>001</td>
+                <td>A</td>
+                <td>10000</td>
+            </tr>
+            <tr>
+                <td>002</td>
+                <td>B</td>
+                <td>20000</td>
+            </tr>
+            <tr>
+                <td>003</td>
+                <td>C</td>
+                <td>30000</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Inputan User</h2>
+    <table>
+        <tbody>
+            <tr>
+                <td>Kode</td>
+                <td><input type="text" id="kode"></td>
+            </tr>
+            <tr>
+                <td>Banyaknya Barang</td>
+                <td><input type="number" id="banyakBarang"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="submitData()">Submit</button>
+
+    <script>
+        function submitData() {
+    var kodeInput = document.getElementById("kode");
+    var banyakBarangInput = document.getElementById("banyakBarang");
+
+    var kode = kodeInput.value;
+    var banyakBarang = banyakBarangInput.value;
+
+    var harga = cariHargaBerdasarkanKode(kode);
+    var totalPembayaran = hitungTotalPembayaran(banyakBarang, harga);
+
+    var jumlahUang = prompt('Masukkan jumlah uang yang dibayarkan:');
+
+    if (jumlahUang === null || jumlahUang === "") {
+        window.alert("Pembayaran dibatalkan.");
+    } else {
+        var kembalian = hitungKembalian(jumlahUang, totalPembayaran);
+
+        window.alert('Total pembayaran adalah: ' + totalPembayaran + '\nJumlah Uang: ' + jumlahUang + '\nKembalian: ' + kembalian);
+    }
+}
+
+function cariHargaBerdasarkanKode(kode) {
+    switch (kode) {
+        case '001':
+            return 10000;
+        case '002':
+            return 20000;
+        case '003':
+            return 30000;
+        default:
+            return 0;
+    }
+}
+
+function hitungTotalPembayaran(banyakBarang, harga) {
+    return banyakBarang * harga;
+}
+
+function hitungKembalian(jumlahUang, totalPembayaran) {
+    return jumlahUang - totalPembayaran;
+}
+
+    </script>
+
+</body>
+
+</html>
